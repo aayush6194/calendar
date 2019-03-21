@@ -8,7 +8,6 @@ html{
   cursor: url(mouse1.png), auto;
 }
 
-
 @keyframes background-animated {
   0% { background-position: 0% 50%;}
   50% {background-position: 100% 50%;}
@@ -42,12 +41,10 @@ button.btn {
 button.bt:hover{
   background: white;
   color: teal;
-
 }
 
-div.poop{
+div.bt-container{
     align-self: center;
-
 }
 
 .main{
@@ -85,7 +82,7 @@ div.poop{
 }
 
 @media (max-width: 700px){
-  body{
-    display: none
-  }
+.bt-container{
+  display: none;
+}
 }

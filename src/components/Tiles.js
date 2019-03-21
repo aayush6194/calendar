@@ -25,11 +25,11 @@ import React from 'react';
    const FirstTile = styled(Tile)`
      grid-column-start: ${props => props.start};`;
 
-let Tiles = props => {
-  if (props.day === 1) {
-    return <FirstTile onClick={props.click} start={props.firstDay + ""}><Daybox>{props.day}</Daybox>{props.event}</FirstTile>;
+let Tiles = prop => {
+  if (prop.day === 1) {
+    return <FirstTile onClick={prop.click} start={prop.firstDay }><Daybox>{prop.day}</Daybox>{prop.event}</FirstTile>;
   }
-  return <Tile onClick={props.click}><Daybox>{props.day}</Daybox>{props.event}</Tile>;
+  return <Tile onClick={prop.click}><Daybox>{prop.day}</Daybox>{prop.event}</Tile>;
 };
 
 export default Tiles;

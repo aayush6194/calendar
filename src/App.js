@@ -7,7 +7,13 @@ import Modal from  './components/Modal';
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 10% auto 10%;`;
+  grid-template-columns: 10% auto 10%;
+  height: 80vh;
+  @media (max-width: 720px){
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  `;
 
 const Title = styled.h1`
   text-align: center;
@@ -20,7 +26,9 @@ const Title = styled.h1`
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(7, 1fr);`;
+  grid-template-columns: repeat(7, 1fr);
+
+  `;
 
 class App extends React.Component {
   constructor(props) {
@@ -45,7 +53,7 @@ class App extends React.Component {
   }
 
    firstDay(){
-    return (new Date(this.state.year, this.state.month , 1)).getDay() + 1;
+    return parseInt(((new Date(this.state.year, this.state.month , 1)).getDay() + 1));
   }
 
   numDays(month, year) {
@@ -81,26 +89,27 @@ class App extends React.Component {
 
   render() {
     return (
+      <div>
       <div className="main">
         <Title>
           {this.months[this.state.month]}, {this.state.year}, {this.state.time}
         </Title>
         <Wrapper>
-          <div className = "poop">
-             <button className="bt" onClick={()=>{this.changeMonth(-1)}}> <i className="material-icons">chevron_left</i></button>
+          <div className = "bt-container">
+             <button className="bt hide-on-sm" onClick={()=>{this.changeMonth(-1)}}> <i className="material-icons">chevron_left</i></button>
           </div>
         <Container>
           {this.weekdays.map(i => <Weekdays day={i}  key={i.toString()}/>)}
-
-          {this.daysArray(this.numDays(this.state.month, this.state.year)).map(i => <Tiles day={i} firstDay={this.firstDay.bind(this)} event={this.state.events[0][0]}  key={i.toString()} click={()=>{ this.setState({components : {modal: true}})}}/>
+          {this.daysArray(this.numDays(this.state.month, this.state.year)).map(i => <Tiles day={i} firstDay={()=>{return this.firstDay()}} event={this.state.events[0][0]}  key={i.toString()} click={()=>{ this.setState({components : {modal: true}})}}/>
           )
           }
         </Container>
-        <div className = "poop">
-          <button className="bt" onClick={()=>{this.changeMonth(1)}}><i className="material-icons">chevron_right</i></button>
+        <div className = "bt-container">
+          <button className="bt hide-on-sm" onClick={()=>{this.changeMonth(1)}}><i className="material-icons">chevron_right</i></button>
          </div>
          <Modal show={this.state.components.modal} close={()=>{ this.setState({components : {modal: false}})}}/>
         </Wrapper>
+      </div>
       </div>
     );
   }
